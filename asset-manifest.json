@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sirchproject%20%20/static/css/main.5cabf6fe.css",
+    "main.js": "/sirchproject%20%20/static/js/main.501ad36d.js",
+    "static/js/787.5d65d99f.chunk.js": "/sirchproject%20%20/static/js/787.5d65d99f.chunk.js",
+    "index.html": "/sirchproject%20%20/index.html",
+    "main.5cabf6fe.css.map": "/sirchproject%20%20/static/css/main.5cabf6fe.css.map",
+    "main.501ad36d.js.map": "/sirchproject%20%20/static/js/main.501ad36d.js.map",
+    "787.5d65d99f.chunk.js.map": "/sirchproject%20%20/static/js/787.5d65d99f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5cabf6fe.css",
+    "static/js/main.501ad36d.js"
+  ]
+}
