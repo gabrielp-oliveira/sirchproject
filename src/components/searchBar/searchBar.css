@@ -1,0 +1,57 @@
+.search-input {
+    background-color: rgb(46, 46, 46);
+    width: 300px;
+    color: white;
+    height: min-content;
+    margin-top: 50px;
+    border-radius: 5px;
+}
+
+.search-input input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    height: 30px;
+    color: white;
+    align-self: flex-start;
+    width: 90%;
+    margin-left: 10px;
+    font-size: 18px;
+}
+.input {
+    display: flex;
+    justify-content: space-between;
+}
+.input span {
+    align-self: center;
+    padding-right: 5px;
+}
+.input span:hover{
+    cursor: pointer;
+}
+.autocom-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(0, 0, 0, 0.2);
+}
+
+.autocom-box > li {
+    display: flex;
+    justify-content: flex-start;
+    width: calc(100% - 10px);
+    height: 25px;
+    padding: 5px;
+    cursor: pointer;
+    margin-top: 2px;
+    overflow: hidden;  
+    text-overflow: ellipsis
+}
+.autocom-box > li > svg {
+    margin-right: 10px;
+    align-self: center;
+}
+.autocom-box > li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
