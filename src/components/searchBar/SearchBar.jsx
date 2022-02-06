@@ -38,25 +38,29 @@ function SearchBar() {
     }
     function arrowMove(e) {
         if (e.key == 'ArrowDown') {
-            if (arrowPosition <= 10) {
+            if (arrowPosition <= 6) {
                 setArrowPosition(arrowPosition + 1)
             }
         }
         if (e.key == 'ArrowUp') {
-            if (arrowPosition > -1) {
+            if (arrowPosition >= 1) {
                 setArrowPosition(arrowPosition - 1)
             }
         }
+        if(e.key == 'Enter'){
+            const url = result[arrowPosition].url
+            window.open(url, '_blank').focus();
+        }
     }
 
-    function formatSearchString(text, length) {
+    function formatResult(text, length, url) {
         const split = text.split('')
         const result = []
         for (let i = length; i < split.length; i++) {
             result.push(split[i])
         }
         result.join('')
-        return <span>
+        return <span onClick={() => window.open(url, '_blank').focus()}>
             <span><FontAwesomeIcon icon={faSearch} /></span>
             <span >{refInput.current.value}</span>
             <span className='gray'>{result}</span>
@@ -74,7 +78,7 @@ function SearchBar() {
                 return <li key={val.displayText}
                     value={val.displayText}
                     className={i === arrowPosition ? 'select' : ''}>
-                    {formatSearchString(val.displayText, refInput.current.value.length)}
+                    {formatResult(val.displayText, refInput.current.value.length, val.url)}
                 </li>
             })}
         </div>
