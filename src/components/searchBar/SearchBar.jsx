@@ -17,7 +17,7 @@ function SearchBar() {
 
     function bingWebSearch(value, e) {
         if (!e) return
-        if (e.code == "ArrowDown" || e.code == "ArrowUp") {
+        if (e.code == "ArrowDown" || e.code == "ArrowUp"|| e.code == "ArrowLeft") {
             return
         } else {
 
@@ -65,7 +65,7 @@ function SearchBar() {
                 setArrowPosition(7)
                 refInput.current.value = refInput.current.value = result[7].displayText
             } if (arrowPosition <= 7 && arrowPosition > 0) {
-                refInput.current.value = result[arrowPosition].displayText
+                refInput.current.value = result[arrowPosition -1].displayText
                 setArrowPosition(arrowPosition - 1)
             }if(arrowPosition === 0){
                 refInput.current.value = query
