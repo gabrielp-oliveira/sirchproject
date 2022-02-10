@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import './searchBar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,6 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 function SearchBar() {
     const [result, setResult] = useState([])
-    // const [history, setHistory] = useState([])
     const [arrowPosition, setArrowPosition] = useState(-1)
     const [showList, setShowList] = useState(false)
     const [query, setquery] = useState('')
@@ -17,12 +16,16 @@ function SearchBar() {
 
     function bingWebSearch(value, e) {
         if (!e) return
-        if (e.code == "ArrowDown" || e.code == "ArrowUp"|| e.code == "ArrowLeft") {
+        if(value.trim() === ''){
+            setShowList(false)
+            return
+        }
+        if ((e.key.length > 1 ) && e.key !== "ArrowRight" ) {
             return
         } else {
 
             setquery(value)
-            if (value == '') {
+            if (value === '') {
                 setResult([])
                 setShowList(false)
                 return
@@ -43,10 +46,10 @@ function SearchBar() {
         setShowList(false)
     }
     function arrowMove(e) {
-        if (refInput.current.value.trim() == '') return
+        if (refInput.current.value.trim() === '') return
         const res = result
         if (e.key === 'ArrowDown') {
-            if (arrowPosition < 7) {
+            if (arrowPosition < result.length -1) {
                 setArrowPosition(arrowPosition + 1)
             } else {
                 setArrowPosition(-1)
@@ -61,10 +64,11 @@ function SearchBar() {
             setResult(res)
         }
         if (e.key === 'ArrowUp') {
-            if (arrowPosition == -1) {
-                setArrowPosition(7)
-                refInput.current.value = refInput.current.value = result[7].displayText
-            } if (arrowPosition <= 7 && arrowPosition > 0) {
+            if (arrowPosition === -1) {
+                setArrowPosition(result.length -1)
+
+                refInput.current.value = result[result.length -1].displayText
+            } if (arrowPosition <= result.length && arrowPosition > 0) {
                 refInput.current.value = result[arrowPosition -1].displayText
                 setArrowPosition(arrowPosition - 1)
             }if(arrowPosition === 0){
@@ -74,34 +78,23 @@ function SearchBar() {
             }
             setResult(res)
         }
-        if (e.key == 'ArrowRight') {
+        if (e.key === 'ArrowRight') {
             if (arrowPosition === -1) {
                 return
             }
-            // setHistory(oldArray => [...oldArray, refInput.current.value]);
             bingWebSearch(result[arrowPosition].displayText, false)
             refInput.current.value = result[arrowPosition].displayText
 
         }
-        // if (e.key == 'ArrowLeft') {
-        //     if (arrowPosition == -1) {
-        //         return
-        //     }
-        //     if(history.length == 0){
-        //         refInput.current.value = query
-        //         bingWebSearch(query, false)
-
-        //     }else{
-
-        //         refInput.current.value = history[history.length -1]
-        //         bingWebSearch(history[history.length -1], false)
-
-        //         history.pop()
-        //     }
-        // }
         if (e.key === 'Enter') {
-            const url = result[arrowPosition].url
-            window.open(url, '_blank').focus();
+            if(arrowPosition === -1){
+                const search = query.replaceAll(' ', '+')
+                const link = `https://www.bing.com/search?q=${search}&FORM=USBAPI`
+                window.open(link, '_blank').focus();
+            }else{
+                const url = result[arrowPosition].url
+                window.open(url, '_blank').focus();
+            }
         }
     }
 
@@ -124,11 +117,28 @@ function SearchBar() {
             <span className='gray'>{result}</span>
         </span>
     }
+    useEffect(() => {
+        const app = document.querySelector('.App')
+        app.addEventListener('click', (ev) => {
+
+            for(let i = 0; i <= ev.path.length -1; i++ ){
+                if(i === ev.path.length-1){
+                    setShowList(false)
+                    break
+                }
+                if(ev.path[i].className === 'search-input'){
+                    setShowList(true)
+                    break
+                }
+            }
+        })
+        refInput.current.select()
+    }, [])
 
     return <div className="search-input">
         <div className='input'>
             <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Type to search.." onKeyUp={(e) => bingWebSearch(e.target.value.trim(), e)} ref={refInput} onKeyDown={(e) => arrowMove(e)}/>
+            <input type="text" placeholder="Type to search..." onKeyUp={(e) => bingWebSearch(e.target.value.trim(), e)} ref={refInput} onKeyDown={(e) => arrowMove(e)}/>
             <span onClick={() => closeButton()}><FontAwesomeIcon icon={faTimes} /></span>
         </div>
         {showList ? <div className="autocom-box" >
