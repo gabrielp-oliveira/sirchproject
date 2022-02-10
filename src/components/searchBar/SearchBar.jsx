@@ -17,19 +17,14 @@ function SearchBar() {
     function bingWebSearch(value, e) {
         if (!e) return
         if(value.trim() === ''){
+            setResult([])
             setShowList(false)
             return
         }
         if ((e.key.length > 1 ) && e.key !== "ArrowRight" ) {
             return
         } else {
-
             setquery(value)
-            if (value === '') {
-                setResult([])
-                setShowList(false)
-                return
-            }
             axios.get(`https://api.bing.microsoft.com/v7.0/Suggestions?q=${value}`, {
                 headers: { 'Ocp-Apim-Subscription-Key': process.env.REACT_APP_AZURE_SUBSCRIPTION_KEY }
             }).then((result) => {
