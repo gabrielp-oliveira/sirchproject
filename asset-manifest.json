@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sirchproject/static/css/main.b8924848.css",
-    "main.js": "/sirchproject/static/js/main.3f92e9ec.js",
+    "main.css": "/sirchproject/static/css/main.432a7762.css",
+    "main.js": "/sirchproject/static/js/main.800bc29b.js",
     "static/js/787.5d65d99f.chunk.js": "/sirchproject/static/js/787.5d65d99f.chunk.js",
     "index.html": "/sirchproject/index.html",
-    "main.b8924848.css.map": "/sirchproject/static/css/main.b8924848.css.map",
-    "main.3f92e9ec.js.map": "/sirchproject/static/js/main.3f92e9ec.js.map",
+    "main.432a7762.css.map": "/sirchproject/static/css/main.432a7762.css.map",
+    "main.800bc29b.js.map": "/sirchproject/static/js/main.800bc29b.js.map",
     "787.5d65d99f.chunk.js.map": "/sirchproject/static/js/787.5d65d99f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b8924848.css",
-    "static/js/main.3f92e9ec.js"
+    "static/css/main.432a7762.css",
+    "static/js/main.800bc29b.js"
   ]
 }
